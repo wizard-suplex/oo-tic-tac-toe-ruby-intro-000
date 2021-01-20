@@ -36,7 +36,7 @@ class TicTacToe
   def position_taken?(index)
     @board[index] != " "
   end
-  
+
   # Make sure the move is valid
   def valid_move?(index)
     !position_taken?(index) && index.between(0,8)
