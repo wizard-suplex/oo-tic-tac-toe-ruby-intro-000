@@ -47,14 +47,17 @@ class TicTacToe
     !position_taken?(index) && index.between(0,8)
   end
 
+  # What turn number are we on?
   def turn_count
   @board.count{|square| square != " " }
   end
 
+  # Whose turn is it
   def current_player
     turn_count.even? ? "X" : "O"
   end
 
+  # To everything there is a season / Turn, Turn, Turn
   def turn
     puts "Please enter a number (1-9):"
     user_input = gets.strip
@@ -68,6 +71,7 @@ class TicTacToe
     display_board
   end
 
+  # YOU COULD BE A WINNER!
   def won?
     WIN_COMBINATIONS.any? do |combo|
       if position_taken?(combo[0]) && @board[combo[0]] == @board[combo[1]] && @board[combo[1]] == @board[combo[2]]
@@ -76,24 +80,29 @@ class TicTacToe
     end
   end
 
+  # It's wafer thin!
   def full?
     @board.all?{|square| square != " " }
   end
 
+  # It appears we've reached an impasse.
   def draw?
     full? && !won?
   end
 
+  # Is This The End?
   def over?
     won? || draw?
   end
 
+  # Winner Winner Chicken Dinner
   def winner
     if combo = won?
       @board[combo[0]]
     end
   end
 
+  # The only winning move is not to.
   def play
     turn until over?
     puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
